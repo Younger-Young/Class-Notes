@@ -1,3 +1,3 @@
-my$(id)=function(){
- document.getElementById("id");
+function my$(id){
+ return document.getElementById(id);
 }
