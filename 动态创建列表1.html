@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="按钮" id="btn"/>
+    <div id="dv"></div>
+    <script src="common.js"></script>
+    <script>
+        var arr=["A", "B", "C", "D"];
+    //点击按钮，动态创建列表，把列表加到div中
+my$("btn").onclick=function(){
+    //创建ul，把ul立刻加入到父级元素div中
+    var ulObj=document.createElement("ul");
+    my$("dv").appendChild(ulObj);
+    //动态创建li，加到ul中
+    for (var i=0; i<arr.length; i++){
+        var liObj=document.createElement("li");
+        //设置li中间的文字内容
+        liObj.innerHTML=arr[i];
+        ulObj.appendChild(liObj);
+        //为li添加鼠标进入/离开事件
+        liObj.onmouseover=function(){
+            this.style.backgroundColor="red";
+        };
+        liObj.onmouseout=function(){
+            this.style.backgroundColor="";
+        };
+    }
+}
+    </script>
+</body>
+</html>
