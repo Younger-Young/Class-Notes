@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="点击按钮创建" id="btn" />
+    <div id="dv"></div>
+    <script src="common.js"></script>
+
+    <script>
+        console.log("test");
+        var arr = [
+            {name: "百度", href:"http://www.baidu.com"},
+            {name: "谷歌", href:"http://www.google.com"},
+            {name: "优酷", href:"http://www.youku.com"},
+            {name: "土豆", href:"http://www.tudou.com"},
+            {name: "爱奇艺", href:"http://www.aiqiyi.com"}
+        ];
+        my$("btn").onclick = function () {
+            //创建table加入到div中
+            var tableObj = document.createElement("table");
+            tableObj.cellpadding = "0";
+            tableObj.cellspacing = "0";
+            tableObj.border = "1";
+            my$("dv").appendChild(tableObj);
+            //创建行，把行加到table中
+            for (var i = 0; i < arr.length; i++) {
+                var dt = arr[i];//每个对象
+                var trObj = document.createElement("tr");
+                tableObj.appendChild(trObj);
+                //创建第一个列，然后加入到行中
+                var td1 = document.createElement("td");
+                td1.innerText = dt.name;
+                trObj.appendChild(td1);
+                //创建第二个列
+                var td2 = document.createElement("td");
+                td2.innerHTML = "<a href=" + dt.href + ">" + dt.name + "</a>";
+                trObj.appendChild(td2);
+            }
+        }
+    </script>
+</body>
+
+</html>
