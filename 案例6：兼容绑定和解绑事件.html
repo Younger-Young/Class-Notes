@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="按钮1" id="btn1" />
+    <input type="button" value="按钮2" id="btn2" />
+    <script src="common.js"></script>
+    <script>
+        //绑定事件兼容代码
+        function addEventListener(element, type, fn) {
+            if (element.addEventListener) {
+                element.addEventListener(type, fn, false);
+            } else if (element.attachEvent) {
+                element.attachEvent("on" + type, fn);
+            } else {
+                element["on" + type] = fn;
+            }
+        }
+        //解绑事件的兼容代码
+        function removeEventListener(element, type, fn) {
+            //判断浏览器是否支持这个方法  
+            if (element.removeEventListener) {
+
+                element.removeEventListener(type, fn, false);
+
+            } else if (elment.detachEvent) {
+                element.detachEvent("on" + type, fn);
+            } else {
+                element["on" + type] = null; //对象.onclick也可以写成对象["onclick"]
+            }
+        }
+
+        function f1() {
+            console.log("第一个事件");
+        }
+        function f2() {
+            console.log("第二个事件");
+        }
+        function f3(){
+            removeEventListener(my$("btn1"),"click",f1);
+        }
+
+        addEventListener(my$("btn1"), "click", f1);
+        addEventListener(my$("btn1"), "click", f2);
+        //给按钮2注册一个事件，移除按钮1的第一个事件
+        addEventListener(my$("btn2"),"click",f3);
+
+        // my$("btn2").onclick = function () {
+        //     removeEventListener(my$("btn1"), "click", f1);
+        // }
+        /*
+        removeEventListener(my$("btn2"),"click",f2);*/
+
+    </script>
+</body>
+
+</html>
