@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #cb {
+            display: block;
+            height: 25px;
+            width: 300px;
+            border: 1px solid black;
+            display: inline-block;
+        }
+
+        #box {
+            width: 350px;
+            margin: 300px auto;
+        }
+
+        span {
+            display: block;
+        }
+
+        #div2 {
+            width: 300px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <input type="text" id="cb" />
+        <input type="button" value="搜索" />
+    </div>
+    <script src="common.js"></script>
+    <script>
+        var arr = ["百度搜索", "谷歌搜索", "搜索引擎", "百度一下", "谷歌一下"]
+        //1、给id="cb"的文本框注册键盘抬起事件
+        my$("cb").onkeyup = function (e) {
+            if (my$("div2")) {
+                my$("box").removeChild(my$("div2"))
+                }
+            //定义一个空数组，用于存放匹配的结果
+            var newArr = [];
+            var text = e.target.value;
+            for (var i = 0; i < arr.length; i++) {
+                //判断文本框的内容是否与arr内容一致
+                if (arr[i].indexOf(text) !== -1) {
+                    newArr.push(arr[i]);
+                }
+            }
+            if (newArr.length === 0 || text === '') {
+                if (my$("div2")) {
+                    my$("box").removeChild(my$("div2"))
+                }
+                return
+            }
+            //创建div，用于置放span
+            var divObj = document.createElement("div");
+            divObj.id = "div2";
+            my$("box").appendChild(divObj);
+            //创建span，用于置放匹配的结果
+            console.log(newArr)
+            for (var i = 0; i < newArr.length; i++) {
+                var spanObj = document.createElement("span");
+                my$("div2").appendChild(spanObj);
+                spanObj.innerHTML = newArr[i];
+            }
+        }
+       //4、给新数组添加鼠标进入/离开事件
+    </script>
+</body>
+
+</html>
